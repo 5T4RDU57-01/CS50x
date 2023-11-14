@@ -1,0 +1,11 @@
+sort1 uses: bubblesort
+
+How do you know?: takes the least time on already sorted array
+
+sort2 uses: merge sort
+
+How do you know?: least time overall on the random and reversed array
+
+sort3 uses: selection sort
+
+How do you know?: took the most time on the reversed array
