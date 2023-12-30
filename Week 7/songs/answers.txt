@@ -1,0 +1,3 @@
+i) I would characterize the person's audio aura as "High energy but less positive songs that they can dance to".
+ii) This aura may not be representative of the listener as it was calculated using only three metrics and using just the top 100 songs.
+    Better ways to calculate this arua might include: using a larger number of songs, using more metrics such as tempo, genre and the tone of the lyrics.
