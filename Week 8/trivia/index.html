@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // TODO: Add code to check answers to questions
+            document.addEventListener('DOMContentLoaded', function() {
+
+                let correct = document.querySelector('.correct');
+                let incorrect = document.querySelectorAll('.incorrect');
+                let status = document.querySelector('#status');
+
+                correct.addEventListener('click', function() {
+                    status.innerHTML = 'Correct Answer!';
+                    correct.style.backgroundColor = 'green';
+                });
+
+                for (let i = 0; i < incorrect.length; i++) {
+
+                        incorrect[i].addEventListener('click',function() {
+                        status.innerHTML = 'Incorrect!';
+                        incorrect[i].style.backgroundColor = 'red';
+                    });
+
+                }
+
+                document.querySelector("#submitAnswer").addEventListener('click', function() {
+
+                    let answer = document.querySelector('input');
+                    let statusTwo = document.querySelector('#statusTwo');
+
+                    if ((answer.value) == ('1986')) {
+                        statusTwo.innerHTML = 'Correct!';
+                        answer.style.backgroundColor = 'green';
+                    }
+                    else {
+                        statusTwo.innerHTML = 'Incorrect!';
+                        answer.style.backgroundColor = 'red';
+                    }
+
+                });
+
+
+
+                });
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3> In which country is it illegal to "Handle salmon in suspicious circumstances"?  </h3>
+                <p id="status"> </p>
+
+                <button class="correct" type="submit">United Kingdom</button>
+                <button class="incorrect">United States</button>
+                <button class="incorrect">New Zealand</button>
+                <button class="incorrect">Somalia</button>
+
+
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3>When was this law introduced? </h3>
+                <p id="statusTwo"></p>
+
+                <input type="text" id ="answer" name="answer">
+                <button id="submitAnswer">Sumbit</button>
+
+            </div>
+        </div>
+    </body>
+</html>

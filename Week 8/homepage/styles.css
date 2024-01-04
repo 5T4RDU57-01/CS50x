@@ -1,0 +1,165 @@
+body {
+    background-color: #212529;
+    color: #818181;
+    font-size: 100%;
+}
+
+hr {
+    border-top: 2px solid white;
+}
+
+.main {
+    background-color: #212529;
+    color: white;
+    margin: auto;
+    width: 75%;
+    height: 100%;
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+.mainHeading {
+    padding-top: 10px;
+    font-family: fantasy;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.main a {
+    color: #818181;
+}
+
+.content {
+    width: 90%;
+    margin: auto;
+    text-align: left;
+    font-family: fantasy;
+}
+
+.infoHeading {
+    font-size: 1.5em;
+    padding-top: 15px;
+}
+
+
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 200px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    box-shadow: inset 0 0 0 3px #818181;
+    color: #818181;
+  }
+  
+  /* The navigation menu links */
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+  }
+
+.sidenavHeading {
+    color: #f1f1f1;
+    font-size: x-large;
+    padding: 6px 8px 6px 16px;
+}
+
+.rightBar {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 15%; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    right: 0;
+    background-color: black; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    box-shadow: inset 0 0 0 3px #818181;
+    color: #818181;
+    text-align: center;
+    font-family: fantasy;
+}
+
+
+.flagdiv {
+    bottom: 0;
+    position: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bi {
+    display: block;
+    height: 25px;
+    width: 38px;
+    border-radius: 5%;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.homepageButton {
+    position: relative;
+    padding-top: 50px;
+}
+
+.credits {
+    padding-top: 10%;
+    right: 0;
+    bottom: 0;
+    font-size: small;
+    color: #818181;
+}
+
+.infoImg {
+    float: right;
+    width: 280px;
+    height: 180px;
+    padding-left: 15px;
+}
+
+.infoParagraph {
+    font-size: 18px;
+}
+
+#gascentrifuge {
+    height: 300px;
+}
+
+ul {
+    padding-top: 10px;
+}
+
+#laser {
+    width: 350px;
+    height: 220px;
+}
+
+.homepageFact {
+    font-family: fantasy;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.fact {
+    color: antiquewhite;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
