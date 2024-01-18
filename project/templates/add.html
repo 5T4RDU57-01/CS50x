@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    New Entry
+{% endblock %}
+
+{% block main %}
+    <form>
+        <div class="mb-3">
+            <label for="title">Title:</label>
+            <input id="title" name="title" type="text" value="{{ datetime.now() }}" placeholder="Title" autocomplete="off" autofocus>
+        </div>
+        <div class="mb-3" id="entryDiv">
+            <label for="entry">Entry:</label>
+            <textarea id="entry" name="entry" rows="25" cols="125" autocomplete="off" placeholder="Entry"></textarea>
+        </div>
+    </form>
+{% endblock %}
