@@ -1,4 +1,4 @@
-from flask import redirect, session
+from flask import redirect, session, render_template, flash, url_for
 from functools import wraps
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
@@ -39,3 +39,37 @@ def get_tone(text):
         
         case _:
             return "Neutral"
+        
+
+def apology(message, code=400):
+    """Render message as an apology to user."""
+
+    def escape(s):
+        """
+        Escape special characters.
+
+        https://github.com/jacebrowning/memegen#special-characters
+        """
+        for old, new in [
+            ("-", "--"),
+            (" ", "-"),
+            ("_", "__"),
+            ("?", "~q"),
+            ("%", "~p"),
+            ("#", "~h"),
+            ("/", "~s"),
+            ('"', "''"),
+        ]:
+            s = s.replace(old, new)
+        return s
+
+    return render_template("apology.html", top=code, bottom=escape(message)), code
+
+
+def give_message(message_text, type, redirect_to=None):
+
+    flash(message_text, type)
+
+    if redirect_to:
+        return redirect(url_for(redirect_to))
+    

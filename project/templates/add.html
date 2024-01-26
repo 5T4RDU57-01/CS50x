@@ -8,11 +8,12 @@
     <form>
         <div class="mb-3">
             <label for="title">Title:</label>
-            <input id="title" name="title" type="text" value="{{ datetime.now() }}" placeholder="Title" autocomplete="off" autofocus>
+            <input id="title" name="title" type="text" placeholder="Title" autocomplete="off" autofocus>
         </div>
         <div class="mb-3" id="entryDiv">
             <label for="entry">Entry:</label>
-            <textarea id="entry" name="entry" rows="25" cols="125" autocomplete="off" placeholder="Entry"></textarea>
+            <textarea id="entry" name="entry" rows="25" cols="125" autocomplete="off" placeholder="Entry" required></textarea>
         </div>
+        <button class="btn btn-primary" type="submit">Add</button>
     </form>
 {% endblock %}

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Your Entries
+{% endblock %}
+
+{% block main %}
+
+    {% for entry in entries %}
+
+    <div class="table-responsive" id="{{ entry['id'] }}">
+        <table class="table-bordered">
+            <tr>
+                <th id="entryTitle">
+                    {{ entry["title"] }}
+                </th>
+            </tr>
+            <tr id="entryTime">
+                <h3>
+                   {{ entry["time"] }}
+                </h3>
+            </tr>
+            <tr id="entryTone">
+           
+                {% if entry["tone"] == "Mostly Positive" %}
+           
+                <h3 style="color: blue;">
+                   {{ entry["tone"] }}
+                </h3>
+           
+                {% elif entry["tone"] == "Mostly Negative" %}
+
+                <h3 style="color: red;">
+                    {{ entry["tone"] }}
+                </h3>
+           
+                {% else %}
+
+                <h3 style="color:darkslategray ;">
+                    {{ entry["tone"] }}
+                </h3>
+                {% endif %}
+           
+            </tr>
+            <tr id="entryEntry">
+                <pre>
+                   {{ entry["entry"] }}
+                </pre>
+            </tr>
+            <tr>
+                <button class="btn btn-warning" onclick="confirmDelete('{{ entry.id }}')">Delete</button>
+            </tr>
+        </table>
+    </div>
+
+    {% endfor %}
+
+{% endblock %}
