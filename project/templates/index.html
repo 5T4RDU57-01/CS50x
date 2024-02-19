@@ -6,53 +6,25 @@
 
 {% block main %}
 
+<div class="container">
+    
     {% for entry in entries %}
+        <div class="row" >
+            <div class="continer" id="entry['id']" >
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ entry.title }}</h5>
+                        <p class="card-text" style="color: gray;"><ins>{{ entry.time }}</ins></p>
+                        <p class="card-text"><ins>Tone: {{ entry.tone }}</ins></p>
+                        <p class="card-text entry-text">{{ entry.entry}}</p>
+                        <button class="btn btn-success btn-sm" id="deleteButton" onclick="confirmDelete('{{ entry.entry_id }}')">Delete</button>
 
-    <div class="table-responsive" id="{{ entry['id'] }}">
-        <table class="table-bordered">
-            <tr>
-                <th id="entryTitle">
-                    {{ entry["title"] }}
-                </th>
-            </tr>
-            <tr id="entryTime">
-                <h3>
-                   {{ entry["time"] }}
-                </h3>
-            </tr>
-            <tr id="entryTone">
-           
-                {% if entry["tone"] == "Mostly Positive" %}
-           
-                <h3 style="color: blue;">
-                   {{ entry["tone"] }}
-                </h3>
-           
-                {% elif entry["tone"] == "Mostly Negative" %}
-
-                <h3 style="color: red;">
-                    {{ entry["tone"] }}
-                </h3>
-           
-                {% else %}
-
-                <h3 style="color:darkslategray ;">
-                    {{ entry["tone"] }}
-                </h3>
-                {% endif %}
-           
-            </tr>
-            <tr id="entryEntry">
-                <pre>
-                   {{ entry["entry"] }}
-                </pre>
-            </tr>
-            <tr>
-                <button class="btn btn-warning" onclick="confirmDelete('{{ entry.id }}')">Delete</button>
-            </tr>
-        </table>
-    </div>
-
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+
+</div>
 
 {% endblock %}

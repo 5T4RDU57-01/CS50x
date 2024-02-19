@@ -5,13 +5,25 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/login" method="post">
-        <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
-        </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required>
-        </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
-    </form>
+    <div class="container login">
+            <form action="/login" method="post">
+                <div class="mb-3">
+                    <h2 class="login-heading"><b>Log in to your account</b></h2>
+                </div>
+                <div class="mb-3 input">
+                    <p class="h6 heading-custom">Username</p>
+                    <input autocomplete="off" autofocus class="input-custom form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
+                </div>
+                <div class="mb-3 input">
+                    <p class="h6 heading-custom">Password</p>
+                    <input class="input-custom form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required>
+                </div>
+                <button class="btn btn-success login" type="submit">Log In</button>
+                
+                <div class="register-prompt">
+                    <small>Don't have an account? <a href="/register">Register</a></small>
+                </div>
+                
+            </form>
+    </div>
 {% endblock %}

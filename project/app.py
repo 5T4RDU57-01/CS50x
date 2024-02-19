@@ -16,7 +16,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///users.db")
+db = SQL("sqlite:///project.db")
 
 
 @app.after_request
@@ -34,43 +34,50 @@ def index():
     '''
     show all entry titles, time, tone and ability to remmove them
     '''
+    if request.method == "GET":
+        entries = db.execute("SELECT * FROM entries;")
+        entries = list(reversed(entries))
+        return render_template("index.html", entries=entries)
 
 
 @app.route("/add" , methods=["GET", "POST"])
 @login_required
 def add():
     '''Add new entry'''
-    if request.method() == "GET":
+    if request.method == "GET":
         return render_template("add.html")
     
     # Get the entry and the title
-    title = request.form.get("title")
-    entry = request.form.get("entry")
+    else:
+        title = request.form.get("title")
+        entry = request.form.get("entry")
 
-    # Give apology for no entry
-    if not entry:
-        give_message("Come on, Write something :(", 'error', 'add')
-    # set title to the time if not specified
-    if not title:
-        title = datetime.now()
+        # Give apology for no entry
+        if not entry:
+            give_message("Come on, Write something :(", 'error', 'add')
+        # set title to the time if not specified
+        if not title:
+            title = datetime.now()
 
-    # Get userid, tone and time
-    user_id = session["user_id"]
-    tone = get_tone(entry)
-    entry_time = datetime.now()
+        # Get userid, tone and time
+        user_id = session["user_id"]
+        tone = get_tone(entry)
+        entry_time = datetime.now()
 
-    # Add info to the database
-    db.execute("INSERT INTO entries (user_id, title, time, entry, tone) VALUES (?, ?, ?, ?, ?)", user_id, 
-                                                                                                title, 
-                                                                                                entry_time, 
-                                                                                                entry, 
-                                                                                                tone) 
-    
-    # Inform user of success and redirect to index page
-    give_message("Entry added!", 'message', '/')
+        # Add info to the database
+        db.execute("INSERT INTO entries (user_id, title, time, entry, tone) VALUES (?, ?, ?, ?, ?)",
+                    user_id, 
+                    title, 
+                    entry_time, 
+                    entry, 
+                    tone) 
+        
+        # Inform user of success and redirect to index page
+        flash("Entry added!", 'message')
+        return redirect("/")
 
 
-@app.route("/remove/<str:entry_id>")
+@app.route("/remove/<string:entry_id>")
 @login_required
 def remove(entry_id):
     '''Remove an entry'''
@@ -125,7 +132,7 @@ def logout():
 @app.route("/register", methods=["GET" ,"POST"])
 def register():
     '''Allow user to register with username and password'''
-    if request.method() == "GET":
+    if request.method == "GET":
         return render_template("register.html")
     
     # Getting everything from the form
@@ -161,7 +168,7 @@ def register():
 @login_required
 def change():
     '''Allow user to change password'''
-    if request.method() == "GET":
+    if request.method == "GET":
         return render_template("change_pass.html")
 
     # Get old and new passwords and password confirmation    
@@ -171,15 +178,21 @@ def change():
 
     # Make sure user entered all of them
     if not old_pass:
-        give_message("Please enter your old password!", 'error', 'change_pass')
+        flash("Please enter your old password!", 'error')
+        return redirect("/change_pass")
+    
     if not new_pass:
-        give_message("Please enter your new password!", 'error', 'change_pass')
+        flash("Please enter your new password!", 'error')
+        return redirect("/change_pass")
+    
     if not confirmation:
-        give_message("Please confirm your password!", 'error', 'change_pass')
+        flash("Please confirm your password!", 'error')
+        return redirect("/change_pass")
         
     # See if the two passwords match
     if new_pass != confirmation:
-        give_message("The two passwords must match!", 'error', 'change_pass')
+        flash("The two passwords must match", 'error')
+        return redirect("/change_pass")
 
     
     # Getting the orignal password hash 
@@ -190,8 +203,10 @@ def change():
 
     # If user messes up old password
     if check_password_hash(old_pass_hash, orignal_pass_hash) == False:
-        give_message("The old password is incorrect!", 'error', 'change_pass')
-
+        flash("The old password is incorrrect", 'error')
+        return redirect("/change_pass")
+    
     # Updating the hash and redirecting to index
     db.execute("UPDATE users SET hash = ? WHERE id = ?", generate_password_hash(new_pass), user_id)
-    give_message("Password updated!", 'message', '/')
+    flash("Password updated!" 'message')
+    return redirect("/")

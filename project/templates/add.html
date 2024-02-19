@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block main %}
-    <form>
-        <div class="mb-3">
-            <label for="title">Title:</label>
-            <input id="title" name="title" type="text" placeholder="Title" autocomplete="off" autofocus>
-        </div>
-        <div class="mb-3" id="entryDiv">
-            <label for="entry">Entry:</label>
-            <textarea id="entry" name="entry" rows="25" cols="125" autocomplete="off" placeholder="Entry" required></textarea>
-        </div>
-        <button class="btn btn-primary" type="submit">Add</button>
-    </form>
+    <div class="container" id="addEntry">
+        <form action="/add" method="post">
+            <div class="mb-3" style="padding-top: 5px;">
+                <p class="h6 heading-custom add-page">Title: </p>
+                <input class="input-custom form-control" id="title" name="title" type="text" placeholder="Title" autocomplete="off" autofocus>
+            </div>
+            <div class="mb-3" id="entryDiv">
+                <p class="h6 heading-custom add-page">Entry: </p>
+                <textarea class="input-custom form-control" name="entry" rows="15" cols="125" autocomplete="off" placeholder="Type your entry here" required></textarea>
+            </div>
+            <button class="btn btn-success" type="submit">Add</button>
+        </form>
+    </div>
 {% endblock %}

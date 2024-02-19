@@ -5,16 +5,32 @@
 {% endblock %}
 
 {% block main %}
+<div class="container login">
     <form action="/register" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
+            <h3 class="login-heading"><b>Register for an account</b></h3>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password" required>
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Username</p>
+            <input autocomplete="off" autofocus class="input-custom form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
+        
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Password</p>
+            <input class="input-custom form-control mx-auto w-auto" name="password" placeholder="Old Password" type="password" required>
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Confirm Password</p>
+            <input class="input-custom form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
+        </div>
+
+        <button class="btn btn-success login" type="submit">Register</button>
+        
+        <div class="register-prompt">
+            <small>Already have an account? <a href="/login">Log In</a></small>
+        </div>
+        
     </form>
+</div>
 {% endblock %}

@@ -22,13 +22,21 @@ def login_required(f):
 def get_tone(text):
     '''Get the tone of the text'''
 
-    if (not text) or (text == ''):
+    # Check if we actually got text
+    if (not text) or (text.strip() == ''):
         return None
     
+    # Create intance
     sent = SentimentIntensityAnalyzer()
+
+    # Get the sentiment scores
     scores = sent.polarity_scores(text)
+    scores.pop("compound")
+
+    # Get the strongest sentiment
     tone = max(scores, key=scores.get)
 
+    # Output tone based on that
     match tone:
         
         case "pos":
@@ -37,7 +45,7 @@ def get_tone(text):
         case "neg":
             return "Mostly Negative"
         
-        case _:
+        case "neu":
             return "Neutral"
         
 
@@ -71,5 +79,5 @@ def give_message(message_text, type, redirect_to=None):
     flash(message_text, type)
 
     if redirect_to:
-        return redirect(url_for(redirect_to))
+        return redirect(redirect_to)
     

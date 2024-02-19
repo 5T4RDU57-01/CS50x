@@ -5,17 +5,32 @@
 {% endblock %}
 
 {% block main %}
-    <form action="/change_pass" method="post">
+<div class="container login">
+    <form action="/register" method="post">
         <div class="mb-3">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="old" placeholder="Old Password" type="password" required>
+            <h3 class="login-heading"><b>Change Your Password</b></h3>
+        </div>
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Username</p>
+            <input autocomplete="off" autofocus class="input-custom form-control mx-auto w-auto" name="username" placeholder="Username" type="text" required>
+        </div>
+        
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Password</p>
+            <input class="input-custom form-control mx-auto w-auto" name="password" placeholder="Old Password" type="password" required>
+        </div>
+        
+        <div class="mb-3 input">
+            <p class="h6 heading-custom register">Confirm Password</p>
+            <input class="input-custom form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
         </div>
 
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="new" placeholder="New Password" type="password" required>
+        <button class="btn btn-success login" type="submit">change Password</button>
+        
+        <div class="register-prompt">
+            <small>Forgot old password? <a href="/register">Make new account</a></small>
         </div>
-        <div class="mb-3">
-            <input class="form-control mx-auto w-auto" name="confirmation" placeholder="Confirm Password" type="password" required>
-        </div>
-        <button class="btn btn-primary" type="submit">Change Password</button>
+        
     </form>
+</div>
 {% endblock %}
