@@ -7,15 +7,25 @@
 {% block main %}
 
 <div class="container">
+
+    {% if entries|length == 0 %}
+
+    <div class="container" style="width: fit-content; background-color: #121212; border-radius: 15px; font-size: small;">
+
+        <h3 style="padding: 5px;">No Entries</h3>
+    </div>
+
+    {% endif %}
     
     {% for entry in entries %}
         <div class="row" >
             <div class="continer" id="entry['id']" >
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">{{ entry.title }}</h5>
+                        <h5 class="card-title" style="font-size: x-large;">{{ entry.title }}</h5>
+                        <p class="card-text">Tone: {{ entry.tone }}</p>
                         <p class="card-text" style="color: gray;"><ins>{{ entry.time }}</ins></p>
-                        <p class="card-text"><ins>Tone: {{ entry.tone }}</ins></p>
+                        <hr>
                         <p class="card-text entry-text">{{ entry.entry}}</p>
                         <button class="btn btn-success btn-sm" id="deleteButton" onclick="confirmDelete('{{ entry.entry_id }}')">Delete</button>
 

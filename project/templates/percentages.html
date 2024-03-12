@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Percentages
+{% endblock %}
+
+{% block main %}
+<div class="container timeframe-drop-menu" data-bs-theme="dark">
+    <div class="dropdown" data-bs-theme="dark">
+        <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ current_choice }}
+        </button>
+
+        <ul class="dropdown-menu">
+
+            <li><a class="dropdown-item" href="/percentages/past_week">Past Week</a></li>
+            <li><a class="dropdown-item" href="/percentages/past_month">Past Month</a></li>
+            <li><a class="dropdown-item" href="/percentages/past_six_months">Past Six Months</a></li>
+            <li><a class="dropdown-item" href="/percentages/past_year">Past Year</a></li>
+            <li><a class="dropdown-item" href="/percentages/all_time">All Time</a></li>
+
+        </ul>
+
+    </div>
+</div>
+<div class="container">
+    <div class="row" >
+        <div class="continer">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title" id="percentages-heading">Entries from {{ current_choice }}</h4>
+                    <hr>
+                    {% for tone, percentage in tone_percentages.items() %}
+
+                    <p class="card-text percentages-text">{{ tone }}:    {{ percentage }}% ({{ counts[tone] }} out of {{ total }}) </p>
+
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

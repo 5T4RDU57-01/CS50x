@@ -15,6 +15,7 @@ main {
     text-shadow: #282828;
 }
 
+
 .input-custom {
     background-color: #121212;
     color: ghostwhite;
@@ -141,4 +142,27 @@ a:hover {
 
 .white-brand {
     color: ghostwhite;
+}
+
+.percentages-text {
+    text-align: left;
+    padding-left: 6%;
+    padding-bottom: 10px;
+    font-size: larger;
+}
+
+hr {
+    color: ghostwhite;
+}
+
+.timeframe-drop-menu {
+    padding-bottom: 2.5%;
+}
+
+.dropdown-toggle {
+    width: 100%;
+}
+
+.dropdown-menu {
+    width: 100% !important;
 }

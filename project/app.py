@@ -4,10 +4,11 @@ from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from helpers import login_required, get_tone, apology, give_message
-from datetime import datetime
+import datetime
+from collections import Counter
 
 # Configure application
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static")
 
 
 # Configure session to use filesystem (instead of signed cookies)
@@ -35,7 +36,8 @@ def index():
     show all entry titles, time, tone and ability to remmove them
     '''
     if request.method == "GET":
-        entries = db.execute("SELECT * FROM entries;")
+        user_id = session["user_id"]
+        entries = db.execute("SELECT * FROM entries WHERE user_id = ?;", user_id)
         entries = list(reversed(entries))
         return render_template("index.html", entries=entries)
 
@@ -57,12 +59,15 @@ def add():
             give_message("Come on, Write something :(", 'error', 'add')
         # set title to the time if not specified
         if not title:
-            title = datetime.now()
+            title = datetime.datetime.now()
+
+        if len(str(title)) > 150:
+            title = title[0:150]
 
         # Get userid, tone and time
         user_id = session["user_id"]
         tone = get_tone(entry)
-        entry_time = datetime.now()
+        entry_time = datetime.datetime.now()
 
         # Add info to the database
         db.execute("INSERT INTO entries (user_id, title, time, entry, tone) VALUES (?, ?, ?, ?, ?)",
@@ -210,3 +215,56 @@ def change():
     db.execute("UPDATE users SET hash = ? WHERE id = ?", generate_password_hash(new_pass), user_id)
     flash("Password updated!" 'message')
     return redirect("/")
+
+
+@app.route("/percentages/<timeframe>")
+@login_required
+def percentages(timeframe):
+    
+    timeframe_days = {
+        "past_week" : 7,
+        "past_month" : 30,
+        "past_six_months" : 183,
+        "past_year" : 365,
+    }
+
+    # Check if we somehow got a bad timeframe
+    if timeframe not in timeframe_days.keys():
+        timeframe = "all_time"
+
+    # Get user id and tones of all entries associated with that user
+    user_id = 1
+    rows = db.execute("SELECT tone,time FROM ENTRIES WHERE user_id = ? ", user_id)
+
+    # Get all the tones
+    if timeframe == "all_time":
+        tones_info = [tones["tone"] for tones in rows]
+
+    else:
+    # Get todays date and the date when the timeframe ends
+        today = datetime.date.today()
+        days = timeframe_days[timeframe]
+        end_timeframe = today - datetime.timedelta(days=days)
+
+        # All the entry tones if they were created after the timeframe
+        
+        # The abomonation after the if statement basically takes the
+        # YYYY-MM-DD part of the date and converts it to a date object before comparison
+        tones_info = [tones["tone"] for tones in rows if (datetime.datetime.strptime(tones["time"].split()[0], "%Y-%m-%d")).date()  >= end_timeframe]
+
+    # Get total no of tones and the occourance of each tone
+    total = len(tones_info)
+    counts = Counter(tones_info)
+
+    # Clone the counts dict
+    tone_percentages = counts.copy()
+
+    # Replace the counts with rounded percentages
+    for tone in counts:
+        tone_percentages[tone] = round(counts[tone] / total * 100)
+
+    # Make the current choice look pretty
+    current_choice = timeframe.replace("_", " ").title()
+
+    return render_template("percentages.html", tone_percentages=tone_percentages, counts=counts, current_choice=current_choice, total=total)
+    
